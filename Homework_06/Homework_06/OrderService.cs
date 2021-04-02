@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Homework_05
+namespace Homework_06
 {
     // 订单服务类:添加订单、删除订单、修改订单、查询订单（按照订单号、商品名称、客户、订单金额等进行查询）功能
     class OrderService
@@ -30,9 +30,8 @@ namespace Homework_05
         {
             bool tag = false;
             Order target = null;
-            foreach (Order temp in GetOrderList)
-                if (temp.OrderID == theID)
-                {
+            foreach(Order temp in GetOrderList)           
+                if (temp.OrderID == theID) {
                     target = temp;
                     tag = true;
                 }
@@ -73,8 +72,7 @@ namespace Homework_05
                     return numberQuery.ToList();
                 case 1:     // 按照商品名称查询
                     string s2 = Console.ReadLine();
-                    var itemNameQuery = GetOrderList.Where(o =>
-                    {
+                    var itemNameQuery = GetOrderList.Where(o => {
                         foreach (OrderDetails details in o.DetailsList)
                             if (details.TheItem.ItemName.Contains(s2)) return true;
                         return false;

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Homework_05
+namespace Homework_06
 {
     // 客户类
     class Customer
@@ -11,7 +13,7 @@ namespace Homework_05
 
         // 构造方法
         public Customer() { }
-        public Customer(string Name, string Address)
+        public Customer(string Name,string Address)
         {
             this.Name = Name;
             this.Address = Address;
@@ -32,5 +34,7 @@ namespace Homework_05
         {
             return $"{nameof(Name)}:{Name},{nameof(Address)}:{Address}";
         }
+
+        
     }
 }

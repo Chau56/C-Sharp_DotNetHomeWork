@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Homework_05
+namespace Homework_06
 {
     class Program
     {

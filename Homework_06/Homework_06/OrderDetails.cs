@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace Homework_05
+namespace Homework_06
 {
     // 订单明细类
     class OrderDetails

@@ -1,4 +1,4 @@
-﻿namespace Homework_05
+﻿namespace Homework_06
 {
     // 货物类
     class Item
