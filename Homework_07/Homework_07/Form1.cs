@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Homework_07
+namespace HomeWork_07
 {
     public partial class CayleyTree : Form
     {
@@ -17,28 +17,19 @@ namespace Homework_07
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if(graphics==null)
-            {
-                graphics = this.CreateGraphics();
-            }
-            drawCayleyTree(10, 200, 310, 100, -Math.PI / 2);
-        }
-
         private Graphics graphics;
+        double th = -Math.PI / 2;
+
+        int n = 10;                         //递归深度
+        int leng = 100;                     //主干长度
         double th1 = 30 * Math.PI / 180;    //右分支角度
         double th2 = 20 * Math.PI / 180;    //左分支角度
         double per1 = 0.6;                  //右分支长度比
         double per2 = 0.7;                  //左分支长度比
+        Pen pen = Pens.Red;                 //画笔颜色
 
-        Dictionary<int, Pen> pairs = new Dictionary<int, Pen>()
-        {{0,Pens.Black },{ 1,Pens.Blue} ,{ 2,Pens.Red},{ 3,Pens.Green},{4,Pens.Orange } };
-        private object numericUpDown1;
-        private object numericUpDown2;
-        private object panel2;
-
-        void drawCayleyTree(int n,double x0,double y0,double leng,double th)        //n是递归深度，leng是主干长度
+        void drawCayleyTree(int n, double x0, double y0, double leng, double th,
+            double th1, double th2, double per1, double per2, Pen pen) 
         {
             if (n == 0) return;
 
@@ -47,58 +38,58 @@ namespace Homework_07
 
             drawLine(x0, y0, x1, y1);
 
-            drawCayleyTree(n - 1, x1, y1, per1 * leng, th + th1);
-            drawCayleyTree(n - 1, x1, y1, per2 * leng, th - th2);
+            drawCayleyTree(n - 1, x1, y1, per1 * leng, th + th1, th1, th2, per1, per2, pen);
+            drawCayleyTree(n - 1, x1, y1, per2 * leng, th - th2, th1, th2, per1, per2, pen);
         }
 
-        void drawLine(double x0,double y0,double x1,double y1)
-        {
-            graphics.DrawLine(Pens.Blue, (int)x0, (int)y0, (int)x1, (int)y1);
-        }
-
-        private void label1_Click(object sender, EventArgs e)
+        private void btn_Draw_Click(object sender, EventArgs e)
         {
             if (graphics == null)
             {
-                graphics = panel2.CreateGraphics();
+                graphics = this.CreateGraphics();
             }
-            graphics.Clear(BackColor);
-            DrawCayleyTree((int)numericUpDown1.Value, 200, 310, (double)numericUpDown2.Value, -Math.PI / 2);
+
+            n = int.Parse(textBox_n.Text);
+            leng = int.Parse(textBox_leng.Text);
+            per1 = double.Parse(textBox_per1.Text);
+            per2 = double.Parse(textBox_per2.Text);
+            th1 = double.Parse(textBox_th1.Text);
+            th2 = double.Parse(textBox_th2.Text);
+
+            if(radioButton1.Checked)
+            {
+                pen = Pens.Blue;
+            }
+            else if (radioButton2.Checked)
+            {
+                pen = Pens.Red;
+            }
+            else if (radioButton3.Checked)
+            {
+                pen = Pens.Green;
+            }
+
+            drawCayleyTree(n, 400, 310, leng, th, th1, th2, per1, per2, pen);
         }
 
-        private void DrawCayleyTree(int value1, int v1, int v2, double value2, double v3)
+
+        void drawLine(double x0, double y0, double x1, double y1)
         {
-            throw new NotImplementedException();
+            graphics.DrawLine(pen, (int)x0, (int)y0, (int)x1, (int)y1);
         }
 
-        private void splitter1_SplitterMoved(object sender, SplitterEventArgs e)
+
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
-        {
-            per1 = (double)numberUpDown3.Value;
-        }
-
-        private void numericUpDown4_ValueChanged(object sender, EventArgs e)
-        {
-            per2 = (double)numberUpDown4.Value;
-        }
-
-        private void numericUpDown5_ValueChanged(object sender, EventArgs e)
-        {
-            th1 = ((int)numberUpDown5.Value) * Math.PI / 180;
-        }
-
-        private void numericUpDown6_ValueChanged(object sender, EventArgs e)
-        {
-            th2 = ((int)numberUpDown6.Value) * Math.PI / 180;
-        }
+        
     }
 }
