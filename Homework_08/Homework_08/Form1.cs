@@ -18,8 +18,6 @@ namespace Homework_08
         int FunctionCode;
         private static List<Item> items = new List<Item>();
         private static Order selectedOrder;
-        private object point;
-
         internal static Order SelectedOrder { get => selectedOrder; set => selectedOrder = value; }
         internal static List<Item> Items { get => items; set => items = value; }
 
@@ -83,32 +81,6 @@ namespace Homework_08
         {
             bdsOrders.DataSource = orderService.Enquery(cbxField, txtInput.Text);
             bdsOrders.ResetBindings(true);
-
-            switch (cbxField.SelectedIndex)
-            {
-                case 0://查询所有
-                    bdsOrders.DataSource = orderService.OrderID;
-                    break;
-                case 1://ID
-                    Order order = orderService.GetOrderList(point);
-                    List<Order> result = new List<Order>();
-                    if (order != null) result.Add(order);
-                    bdsOrders.DataSource = result;
-                    break;
-                case 2://客户
-                    bdsOrders.DataSource = orderService.QueryOrdersByCustomerName(point);
-                    break;
-                case 3://货物
-                    bdsOrders.DataSource = orderService.QueryOrdersByGoodsName(point);
-                    break;
-                case 4://总价格
-                    float.TryParse(point.ToString(), out float totalPrice);
-                    bdsOrders.DataSource =
-                           orderService.QueryByTotalAmount(totalPrice);
-                    break;
-            }
-            bdsOrders.ResetBindings(false);
-
         }
 
         private void cbxField_SelectedIndexChanged(object sender, EventArgs e)
