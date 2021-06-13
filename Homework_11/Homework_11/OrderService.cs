@@ -11,7 +11,6 @@ namespace Homework_08
     class OrderService
     {
         public List<Order> GetOrderList { get; set; } = new List<Order>() { };
-        public object OrderID { get; internal set; }
 
 
         // 添加订单
@@ -106,26 +105,6 @@ namespace Homework_08
         public void SortBySum()
         {
             GetOrderList.Sort((o1, o2) => (int)(o1.Sum - o2.Sum));
-        }
-
-        internal Order GetOrderList(object point)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal object QueryOrdersByCustomerName(object point)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal object QueryOrdersByGoodsName(object point)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal object QueryByTotalAmount(float totalPrice)
-        {
-            throw new NotImplementedException();
         }
     }
 }

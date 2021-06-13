@@ -18,8 +18,6 @@ namespace Homework_08
         int FunctionCode;
         private static List<Item> items = new List<Item>();
         private static Order selectedOrder;
-        private object point;
-
         internal static Order SelectedOrder { get => selectedOrder; set => selectedOrder = value; }
         internal static List<Item> Items { get => items; set => items = value; }
 
@@ -96,13 +94,13 @@ namespace Homework_08
                     bdsOrders.DataSource = result;
                     break;
                 case 2://客户
-                    bdsOrders.DataSource = orderService.QueryOrdersByCustomerName(point);
+                    bdsOrders.DataSource = orderService.QueryOrdersByCustomerName(Keyword);
                     break;
                 case 3://货物
-                    bdsOrders.DataSource = orderService.QueryOrdersByGoodsName(point);
+                    bdsOrders.DataSource = orderService.QueryOrdersByGoodsName(Keyword);
                     break;
                 case 4://总价格
-                    float.TryParse(point.ToString(), out float totalPrice);
+                    float.TryParse(Keyword, out float totalPrice);
                     bdsOrders.DataSource =
                            orderService.QueryByTotalAmount(totalPrice);
                     break;
